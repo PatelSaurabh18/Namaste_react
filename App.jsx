@@ -391,54 +391,46 @@ const RestrauntList2 = [
 // }
 
 
-//Optional Chaining
-const RestrauntCard = (props) => {
 
-  console.log(props);
+//best type Object DeStructuring
+const RestrauntCard = ({name,id,cuisines,lastMileTravelString,cloudinaryImageId,avgRating}) => {
+
+
   return (
     <div className="card">
 
-     
-      <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${props.restraunt.data?.cloudinaryImageId}`} />
-      <h2>{props.restraunt.data?.id}</h2>
-      <h2>{props.restraunt.data?.name}</h2>
-      <h4>{props.restraunt.data?.cuisines.join(' , ')}</h4>
-      <h5>{props.restraunt.data?.avgRating} &#9733;</h5>
-      <h6>Order coming in {props.restraunt.data?.sla.lastMileTravel} Minutes...</h6>
+      <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`} />
+      <h2>{name}</h2>
+      <h4>{cuisines.join(' , ')}</h4>
+      <h5>{avgRating} &#9733;</h5>
+      <h6>Order coming in {lastMileTravelString} Minutes...</h6>
+      <h2>{id}</h2>
+
     </div>
-  )
+  ) 
 }
-
-
-// const RestrauntCard = (props) => {
-//   // console.log(props);
-//   return (
-//     <div className="card">
-
-//       {/* <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${props.restraunt.data?.cloudinaryImageId}`} /> */}
-
-//       <h2>{props.restraunt.data?.id}</h2>
-//       <h2>{props.restraunt.data?.name}</h2>
-//       <h4>{props.restraunt.data?.cuisines.join(' , ')}</h4>
-//       <h5>{props.restraunt.data?.avgRating} &#9733;</h5>
-//       <h6>Order coming in {props.restraunt.data?.sla.lastMileTravel} Minutes...</h6>
-//     </div>
-//   )
-// }
 
 
 
 const Body = () => {
   return (
     <div className="body">
-      <RestrauntCard restraunt={RestrauntList2[0]} />
-      <RestrauntCard restraunt={RestrauntList2[1]} />
-      <RestrauntCard restraunt={RestrauntList2[2]} />
-      <RestrauntCard restraunt={RestrauntList2[3]} />
+      {
+        RestrauntList2.map((restraunt)=>{
+          return <RestrauntCard {...restraunt.data} key={restraunt.data.id} />
+        })
+      }
 
-    </div>
+      {/* <RestrauntCard {...RestrauntList2[0].data} />
+      <RestrauntCard {...RestrauntList2[1].data}/>
+      <RestrauntCard {...RestrauntList2[2].data} />
+      <RestrauntCard {...RestrauntList2[3].data} /> */}
+
+    </div> 
   )
 }
+
+
 
 
 const Footer = () => {
@@ -535,6 +527,99 @@ root.render(AppLayout());
 
 // }
 
+
+
+
+// const RestrauntCard = (props) => {
+//   // console.log(props);
+//   return (
+//     <div className="card">
+
+//       {/* <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${props.restraunt.data?.cloudinaryImageId}`} /> */}
+
+//       <h2>{props.restraunt.data?.id}</h2>
+//       <h2>{props.restraunt.data?.name}</h2>
+//       <h4>{props.restraunt.data?.cuisines.join(' , ')}</h4>
+//       <h5>{props.restraunt.data?.avgRating} &#9733;</h5>
+//       <h6>Order coming in {props.restraunt.data?.sla.lastMileTravel} Minutes...</h6>
+//     </div>
+//   )
+// }
+
+
+
+//Optional Chaining
+// const RestrauntCard = (props) => {
+
+//   console.log(props);
+//   return (
+//     <div className="card">
+
+     
+//       <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${props.restraunt.data?.cloudinaryImageId}`} />
+//       <h2>{props.restraunt.data?.id}</h2>
+//       <h2>{props.restraunt.data?.name}</h2>
+//       <h4>{props.restraunt.data?.cuisines.join(' , ')}</h4>
+//       <h5>{props.restraunt.data?.avgRating} &#9733;</h5>
+//       <h6>Order coming in {props.restraunt.data?.sla.lastMileTravel} Minutes...</h6>
+//     </div>
+//   )
+// }
+
+
+//Object De
+// const RestrauntCard = ({restraunt}) => {
+
+//   return (
+//     <div className="card">
+
+     
+//       <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${restraunt.data?.cloudinaryImageId}`} />
+//       <h2>{restraunt.data?.id}</h2>
+//       <h2>{restraunt.data?.name}</h2>
+//       <h4>{restraunt.data?.cuisines.join(' , ')}</h4>
+//       <h5>{restraunt.data?.avgRating} &#9733;</h5>
+//       <h6>Order coming in {restraunt.data?.sla.lastMileTravel} Minutes...</h6>
+//     </div>
+//   )
+// }
+
+
+//best type Object DeStructuring
+// const RestrauntCard = ({name,id,cuisines,lastMileTravelString,cloudinaryImageId,avgRating}) => {
+
+
+//   return (
+//     <div className="card">
+
+//       <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`} />
+//       <h2>{name}</h2>
+//       <h4>{cuisines.join(' , ')}</h4>
+//       <h5>{avgRating} &#9733;</h5>
+//       <h6>Order coming in {lastMileTravelString} Minutes...</h6>
+//       <h2>{id}</h2>
+
+//     </div>
+//   )
+// }
+
+
+
+
+
+// const Body = () => {
+//   return (
+//     <div className="body">
+//       <RestrauntCard name={RestrauntList2[0].data.name}  cuisines={RestrauntList2[0].data.cuisines}  cloudinaryImageId={RestrauntList2[0].data.cloudinaryImageId}  id={RestrauntList2[0].data.id}  lastMileTravelString={RestrauntList2[0].data.lastMileTravelString} />
+
+
+//       {/* <RestrauntCard name={RestrauntList2[0].data.name} cuisines={RestrauntList2[0].data.cuisines}/>
+//       <RestrauntCard name={RestrauntList2[0].data.name} cuisines={RestrauntList2[0].data.cuisines} />
+//       <RestrauntCard name={RestrauntList2[0].data.name} cuisines={RestrauntList2[0].data.cuisines} /> */}
+
+//     </div>
+//   )
+// }
 
 
 // const RestrauntList1 = [
@@ -1382,6 +1467,5 @@ root.render(AppLayout());
 //     }
 //   },
 // ]
-
 
 
