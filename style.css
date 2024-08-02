@@ -41,7 +41,7 @@
   bottom: 10px;
 } */
 
-.body{
+.restaurent-list{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -60,4 +60,10 @@
 
 .card > img{
   width: 100%;
+}
+
+.body
+{
+  margin: 10px 100px;
+  text-align: center;
 }
