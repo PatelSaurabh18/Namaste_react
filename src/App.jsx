@@ -29,7 +29,7 @@ Treeshaking - Removing unwanted code
       -NavItems(right Side)
       -Cart
     Body
-      -search Bar
+      -search Bar 
       - RestrauntList
           -RestrauntCard (many Cards)
               -image
@@ -46,19 +46,52 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Body from "./components/Body";
+import {createBrowserRouter,Outlet,RouterProvider, Routes} from "react-router-dom"
+import About from "./components/About";
+import Contact from "./components/Contact"
+import Error from "./components/Error";
+import RestrauntMenu from "./components/RestaurantMenu";
 
 const AppLayout = () => {
   return (
     <>
       <Header />
-      <Body />
+      {/* <Body /> */}
+      <Outlet/>
       <Footer />
     </>
   )
 }
 
+const appRouter =createBrowserRouter([
+    {
+      path:"/",
+      element:<AppLayout/>,
+      errorElement:<Error/>,
+      children:[ 
+        {
+          path:"/",
+          element:<Body/>,
+        },
+        {
+          path:"/about",
+          element:<About/>,
+        },
+        {
+          path:"/contact",
+          element:<Contact/>,
+        },
+        {
+          path:"/restaurants/:id",
+          element:<RestrauntMenu/>
+        },
+      ]
+    },
+  
+]);
+ 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(AppLayout());
+root.render(<RouterProvider  router={appRouter}/>)
 
 // root.render(title);
 

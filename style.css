@@ -52,18 +52,70 @@
 .card{
   box-sizing: border-box;
   width: 195px;
-  height: 55vh;
+  height: 40vh;
   border: 1px solid black;
   margin-top: 20px;
   padding: 5px;
+  overflow:scroll;
+  overflow-wrap: break-word;
 }
 
 .card > img{
   width: 100%;
+  height: 60%;
 }
 
 .body
 {
   margin: 10px 100px;
-  text-align: center;
+  /* text-align: center; */
 }
+
+
+/* 
+.shimmer-inner{
+  display: flex;
+  flex-wrap: wrap;
+  width: 76vw;
+  margin: auto;
+  gap: 19px;
+} */
+
+
+.shimmer-outlayer{
+  width: 70vw;
+  height: 80vw;
+  /* background-color: aqua; */
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+.shimmer-card{
+  /* box-sizing: border-box; */
+  width: 170px;
+  height: 25vh;
+  border: 1px solid black;
+  /* margin-top: 20px; */
+  padding: 5px;
+  /* gap: 10px; */
+  margin: auto;
+  background-color: lightgray;
+
+}
+  .restaurant-img{
+    width: 344px;
+    height: 344px;
+  }
+
+
+  .res-menu{
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+  }
+
+  .res-menu > img{
+    margin: 20px;
+  }
