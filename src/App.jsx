@@ -41,7 +41,7 @@ Treeshaking - Removing unwanted code
       -Copyright
     */
 
-import React from "react";
+import React, { lazy ,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -50,7 +50,24 @@ import {createBrowserRouter,Outlet,RouterProvider, Routes} from "react-router-do
 import About from "./components/About";
 import Contact from "./components/Contact"
 import Error from "./components/Error";
-import RestrauntMenu from "./components/RestaurantMenu";
+import RestrauntMenu from "./components/RestaurantMenu"; 
+import Profile from "./components/Profile";
+import ProfileClass from "./components/ProfileClass";
+// import ProfileClass from "./components/ProfileClass";
+// import Instamart from "./components/Instamart"; 
+import Cart from "./components/Cart";
+import Shimmer from "./components/Shimmer";
+
+
+//Chunking
+//Code Splitting
+//Dynamic Building
+//Lazy Loading
+//Dynamic Import
+//On Demand Loading
+const Instamart = lazy(() => import("./components/Instamart"));
+
+
 
 const AppLayout = () => {
   return (
@@ -76,14 +93,31 @@ const appRouter =createBrowserRouter([
         {
           path:"/about",
           element:<About/>,
+          children:[
+            {
+              path:"profile",
+              element:<Profile/>,
+            }
+          ]
         },
         {
           path:"/contact",
           element:<Contact/>,
         },
+
+        {
+          path:"/instamart",
+          element: ( <Suspense fallback={<Shimmer/>}> <Instamart/>   </Suspense>),
+        },
+
+        {
+          path:"/cart",
+          element:<Cart/>,
+        },
+
         {
           path:"/restaurants/:id",
-          element:<RestrauntMenu/>
+          element:   <RestrauntMenu/>
         },
       ]
     },

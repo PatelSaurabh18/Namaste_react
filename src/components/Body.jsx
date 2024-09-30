@@ -3,43 +3,29 @@ import { RestaurantList } from "../Constants";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom";
+import { filterData } from "../utils/helper";
+import useGetRestaurants from "../utils/useGetRestaurants";
+import useOnline from "../utils/useOnline";
 
-function filterData(searchText, allRestaurants) {
-  const filteredData = allRestaurants.filter((restaurant) => 
-    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
-  return filteredData;
-}
 
 const Body = () => {
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [allRestaurants,filteredRestaurants] = useGetRestaurants();
 
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    getRestaurants();
-  }, []);
-
-  async function getRestaurants() {
-    try {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-      );
-      const json = await data.json();
-      setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
-      setAllRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
-
-
-      // console.log(json);
-      
-    } catch (error) {
-      console.error("Failed to fetch restaurant data", error);
-    }
+  const online = useOnline();
+  if(!online){
+    return (
+      <h1> Please Check your Internet Connection!!</h1>
+    )
   }
+
+
 
   return (filteredRestaurants.length === 0) ?  <Shimmer/> : (
     <div className="body">
+
+
       <div className="search-container">
         <input
           type="text"
@@ -61,9 +47,9 @@ const Body = () => {
 
       <div className="restaurent-list">
         {filteredRestaurants?.length > 0 ? (
-          filteredRestaurants.map((restaurant) => (
+          filteredRestaurants.map((restaurant,index) => (
             <Link to={"/restaurants/" + restaurant.info.id}>
-            <RestrauntCard {...restaurant.info} key={restaurant.info.id} />
+            <RestrauntCard {...restaurant.info} key={restaurant.info.id + restaurant.info.name} />
             </Link>
 
           ))
@@ -71,6 +57,8 @@ const Body = () => {
           <h3>No restaurants found</h3>
         )}
       </div>
+
+
     </div>
   );
 };
