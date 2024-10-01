@@ -1,9 +1,7 @@
-import { useState,useEffect } from "react";
-
+import { useState, useEffect } from "react";
 
 const useGetRestaurants = () => {
-    const [allRestaurants, setAllRestaurants] = useState([]);
-
+  const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
@@ -16,22 +14,25 @@ const useGetRestaurants = () => {
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await data.json();
-      setFilteredRestaurants(
+      
+      const restaurants =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || []
-      );
-      setAllRestaurants(
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || []
-      );
+          ?.restaurants || [];
 
-      // console.log(json);
+      setAllRestaurants(restaurants);
+      setFilteredRestaurants(restaurants);
+      
     } catch (error) {
       console.error("Failed to fetch restaurant data", error);
     }
   }
 
-  return [allRestaurants,filteredRestaurants];
+  // Return an object to allow filteredRestaurants to be updated outside the hook
+  return {
+    allRestaurants,
+    filteredRestaurants,
+    setFilteredRestaurants, // Allow updates to filtered restaurants from outside the hook
+  };
 };
 
 export default useGetRestaurants;

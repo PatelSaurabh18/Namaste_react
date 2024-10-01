@@ -11,9 +11,9 @@ const RestrauntCard = ({
   sla: {lastMileTravel},
 }) => {
   return (
-    <div className="card">
-      <img src={ IMG_CDN_URL + cloudinaryImageId}  />
-      <h4>{name}</h4>
+    <div className="w-[200px] h-[300px] border-b-2 shadow-lg p-2 m-2 bg-gray-200">
+      <img className="h-[100px] w-[200px]" src={ IMG_CDN_URL + cloudinaryImageId}   />
+      <h4 className="text-black text-xl font-bold">{name}</h4>
       <h4>{cuisines.join(", ")}</h4>
       <h5>{avgRating} &#9733;</h5>
       {/* <h6>Order coming in {lastMileTravel} Minutes...</h6>
